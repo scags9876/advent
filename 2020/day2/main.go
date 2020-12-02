@@ -4,13 +4,10 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"regexp"
-	"strconv"
+	"strings"
 )
 
 const inputFilename = "input.txt"
-
-var re = regexp.MustCompile(`(\d+)-(\d+)\s(\w):\s(\w+)`)
 
 func main() {
 	input := getInput()
@@ -52,24 +49,23 @@ func solvePuzzle(input []string) {
 }
 
 func checkLine(line string) (validPass1, validPass2 bool) {
-	matches := re.FindStringSubmatch(line)
-	min, _ := strconv.Atoi(matches[1])
-	max, _ := strconv.Atoi(matches[2])
-	letter := matches[3]
-	pw := matches[4]
+	var (
+		min, max int
+		letter rune
+		pw string
+	)
+	_, err := fmt.Sscanf(line, "%d-%d %c: %s", &min, &max, &letter, &pw)
+	if err != nil {
+		panic(err)
+	}
 
-	count := 0
+	count := strings.Count(pw, string(letter))
 	positionCount := 0
-	for i, char := range pw {
-		if string(char) == letter {
-			count++
-			if i+1 == min {
-				positionCount++
-			}
-			if i+1 == max {
-				positionCount++
-			}
-		}
+	if len(pw) >= min && rune(pw[min-1]) == letter {
+		positionCount++
+	}
+	if len(pw) >= max && rune(pw[max-1]) == letter {
+		positionCount++
 	}
 
 	if count >= min && count <= max {
