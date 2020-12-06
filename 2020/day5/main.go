@@ -11,68 +11,35 @@ import (
 const inputFilename = "input.txt"
 
 func main() {
-	input := getInput()
-	solvePuzzle(input)
+	part1()
 }
 
-func getInput() []string {
+func part1() {
 	file, err := os.Open(inputFilename)
 	if err != nil {
 		panic(fmt.Errorf("%s file not found", inputFilename))
 	}
 	defer file.Close()
 
-	var input []string
 	sc := bufio.NewScanner(file)
+
+	highestSeatID := int64(0)
+	r := strings.NewReplacer("F", "0", "L", "0", "B", "1", "R", "1")
+
 	for sc.Scan() {
-		input = append(input, sc.Text())
-	}
-	return input
-}
-
-func solvePuzzle(input []string) {
-	highestID := findHighestSeatID(input)
-	fmt.Printf("Part 1: Highest seat ID: %d\n", highestID)
-
-	//fmt.Printf("Part 2: Multiplying all your trees gets you %d ... Ouch!\n", total)
-}
-
-func findHighestSeatID(input []string) int {
-	highestSeatID := 0
-	for _, pass := range input {
-		seatID := calcSeatID(pass)
+		pass := sc.Text()
+		seatID, err := strconv.ParseInt(r.Replace(pass), 2, 64)
+		if err != nil {
+			panic(err)
+		}
 		if seatID > highestSeatID {
 			highestSeatID = seatID
 		}
-	}
-	return highestSeatID
-}
 
-func calcSeatID(pass string) int {
-	binPass := strings.Replace(pass, "F", "0", -1)
-	binPass = strings.Replace(binPass, "B", "1", -1)
-	binPass = strings.Replace(binPass, "L", "0", -1)
-	binPass = strings.Replace(binPass, "R", "1", -1)
-
-	binRow, binCol := binPass[:7], binPass[7:]
-
-	fmt.Printf("binPass: %s binRow: %s binCol: %s\n", binPass, binRow, binCol)
-
-	row, err := strconv.ParseInt(binRow, 2, 32)
-	if err != nil {
-		panic(err)
-	}
-	col, err := strconv.ParseInt(binCol, 2, 32)
-	if err != nil {
-		panic(err)
-	}
-	seatID, err := strconv.ParseInt(binPass, 2, 32)
-	if err != nil {
-		panic(err)
+		row := seatID >> 3
+		col := seatID - row*8
+		fmt.Printf("boarding pass %s is row %d and col %d .. seatID: %d\n", pass, row, col, seatID)
 	}
 
-	//seatID := (row * 8) + col
-
-	fmt.Printf("boarding pass %s is row %d and col %d .. seatID: %d\n", pass, row, col, seatID)
-	return int(seatID)
+	fmt.Printf("Part 1: Highest seat ID: %d\n", highestSeatID)
 }
