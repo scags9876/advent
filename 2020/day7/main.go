@@ -18,10 +18,10 @@ func main() {
 const myBag = "shiny gold"
 
 type bag struct {
-	desc string
-	canHold map[string]int
-	flatCanHold map[string]int
-	bagCount *int
+	desc         string
+	contents     map[string]int
+	flatContents map[string]int
+	bagCount     *int
 }
 
 func part1() {
@@ -49,9 +49,9 @@ func part1() {
 			bagsMatches := rBags.FindAllStringSubmatch(matches[0][2], -1)
 			//fmt.Printf("bagsMatches is %#v\n", bagsMatches)
 
-			thisBag.canHold = make(map[string]int)
-			for _, container := range bagsMatches {
-				thisBag.canHold[container[2]], err = strconv.Atoi(container[1])
+			thisBag.contents = make(map[string]int)
+			for _, innerBag := range bagsMatches {
+				thisBag.contents[innerBag[2]], err = strconv.Atoi(innerBag[1])
 				if err != nil {
 					panic(err)
 				}
@@ -61,17 +61,16 @@ func part1() {
 	}
 
 	fmt.Printf("found %d total bags\n", len(bags))
-	canHold := bagCanHold(myBag, bags)
-	total = len(canHold)
 
-	// now get the flattened
-	for desc, thisBag := range bags {
-		//fmt.Printf("\tflattening %s\n", desc)
-		canHold := bagCanHold(desc, bags)
-		thisBag.flatCanHold = canHold
-		bags[desc] = thisBag
-		if count, ok := thisBag.flatCanHold[myBag]; ok && count > 0 {
-			//fmt.Printf("%s bag can hold %s bag: (%#v)\n", desc, myBag, canHold)
+	contents := bagContents(myBag, bags)
+	total = len(contents)
+
+	// now get the flattened contents
+	for desc, _ := range bags {
+		//fmt.Printf("\t flattening %s\n", desc)
+		contents := bagContents(desc, bags)
+		if count, ok := contents[myBag]; ok && count > 0 {
+			//fmt.Printf("%s bag can hold %s bag: (%#v)\n", desc, myBag, contents)
 			total++
 		}
 	}
@@ -79,41 +78,44 @@ func part1() {
 	fmt.Printf("Part 1: Number of bags that can hold my %s bag: %d\n", myBag, total)
 }
 
-func bagCanHold(desc string, bags map[string]bag) map[string]int {
+func bagContents(desc string, bags map[string]bag) map[string]int {
 	//fmt.Printf("looking at %s bag\n", desc)
 	thisBag, ok := bags[desc]
 	if !ok {
 		panic("can't find bag")
 	}
-	if thisBag.canHold == nil {
+	if thisBag.contents == nil {
 		//fmt.Printf("%s bag doesn't hold anything\n", desc)
 		return nil
 	}
 
-	if thisBag.flatCanHold != nil {
-		return thisBag.flatCanHold
+	if thisBag.flatContents != nil {
+		return thisBag.flatContents
 	}
 
-	canHold := make(map[string]int)
-	for innerBag, thisCount := range thisBag.canHold {
-		canHold[innerBag] = thisCount
+	contents := make(map[string]int)
+	for innerBag, thisCount := range thisBag.contents {
+		contents[innerBag] = thisCount
 	}
-	//fmt.Printf("%s bag intially can hold %#v\n", desc, canHold)
+	//fmt.Printf("%s bag initially can hold %#v\n", desc, contents)
 
-	for innerBag, _ := range thisBag.canHold {
-		bagCanHold := bagCanHold(innerBag, bags)
+	for innerBag := range thisBag.contents {
+		innerBagContents := bagContents(innerBag, bags)
 
-		for innerInnerBag, innerInnerBagCount := range bagCanHold {
-			if existingCount, ok := canHold[innerInnerBag]; ok {
-				canHold[innerInnerBag] = existingCount + innerInnerBagCount
+		for innerInnerBag, innerInnerBagCount := range innerBagContents {
+			if existingCount, ok := contents[innerInnerBag]; ok {
+				contents[innerInnerBag] = existingCount + innerInnerBagCount
 			} else {
-				canHold[innerInnerBag] = innerInnerBagCount
+				contents[innerInnerBag] = innerInnerBagCount
 			}
 		}
-		//fmt.Printf("%s bag after looking at %s bag can hold %#v\n", desc, innerBag, canHold)
+		//fmt.Printf("%s bag after looking at %s bag can hold %#v\n", desc, innerBag, contents)
 	}
 
-	return canHold
+	thisBag.flatContents = contents
+	bags[desc] = thisBag
+
+	return contents
 }
 
 func part2() {
@@ -141,9 +143,9 @@ func part2() {
 			bagsMatches := rBags.FindAllStringSubmatch(matches[0][2], -1)
 			//fmt.Printf("bagsMatches is %#v\n", bagsMatches)
 
-			thisBag.canHold = make(map[string]int)
+			thisBag.contents = make(map[string]int)
 			for _, container := range bagsMatches {
-				thisBag.canHold[container[2]], err = strconv.Atoi(container[1])
+				thisBag.contents[container[2]], err = strconv.Atoi(container[1])
 				if err != nil {
 					panic(err)
 				}
@@ -166,7 +168,7 @@ func getBagCount(bagName string, bags map[string]bag) int {
 	if !ok {
 		panic("can't find bag")
 	}
-	if thisBag.canHold == nil {
+	if thisBag.contents == nil {
 		//fmt.Printf("%s bag doesn't hold anything\n", desc)
 		return 0
 	}
@@ -176,7 +178,7 @@ func getBagCount(bagName string, bags map[string]bag) int {
 	}
 
 	bagCount := 0
-	for innerBagName, count := range thisBag.canHold {
+	for innerBagName, count := range thisBag.contents {
 		innerBag := getBagCount(innerBagName, bags)
 
 		bagCount += count + (count*innerBag)
