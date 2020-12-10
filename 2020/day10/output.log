@@ -1,0 +1,110 @@
+Part 1: Current joltage: 22. There are 7 1 jolt jumps, 0 2 jolt jumps and 5 3 jolt jumps.  1-jolt jumps x 3-jolt jumps = 35
+input: [1 4 5 6 7 10 11 12 15 16 19]
+stacksize:       0, sequenceSize:   0, remaininginput size:  11, sequence: []
+offset[0], new output 1. putting new combo {sequence:[1] remainingInput:[4 5 6 7 10 11 12 15 16 19] currentOutput:1} in stack
+stacksize:       0, sequenceSize:   1, remaininginput size:  10, sequence: [1]
+offset[0], new output 4. putting new combo {sequence:[1 4] remainingInput:[5 6 7 10 11 12 15 16 19] currentOutput:4} in stack
+stacksize:       0, sequenceSize:   2, remaininginput size:   9, sequence: [1 4]
+offset[0], new output 5. putting new combo {sequence:[1 4 5] remainingInput:[6 7 10 11 12 15 16 19] currentOutput:5} in stack
+offset[1], new output 6. putting new combo {sequence:[1 4 6] remainingInput:[7 10 11 12 15 16 19] currentOutput:6} in stack
+offset[2], new output 7. putting new combo {sequence:[1 4 7] remainingInput:[10 11 12 15 16 19] currentOutput:7} in stack
+stacksize:       2, sequenceSize:   3, remaininginput size:   6, sequence: [1 4 7]
+offset[0], new output 10. putting new combo {sequence:[1 4 7 10] remainingInput:[11 12 15 16 19] currentOutput:10} in stack
+stacksize:       2, sequenceSize:   4, remaininginput size:   5, sequence: [1 4 7 10]
+offset[0], new output 11. putting new combo {sequence:[1 4 7 10 11] remainingInput:[12 15 16 19] currentOutput:11} in stack
+offset[1], new output 12. putting new combo {sequence:[1 4 7 10 12] remainingInput:[15 16 19] currentOutput:12} in stack
+stacksize:       3, sequenceSize:   5, remaininginput size:   3, sequence: [1 4 7 10 12]
+offset[0], new output 15. putting new combo {sequence:[1 4 7 10 12 15] remainingInput:[16 19] currentOutput:15} in stack
+stacksize:       3, sequenceSize:   6, remaininginput size:   2, sequence: [1 4 7 10 12 15]
+offset[0], new output 16. putting new combo {sequence:[1 4 7 10 12 15 16] remainingInput:[19] currentOutput:16} in stack
+stacksize:       3, sequenceSize:   7, remaininginput size:   1, sequence: [1 4 7 10 12 15 16]
+offset[0], new output 19. putting new combo {sequence:[1 4 7 10 12 15 16 19] remainingInput:[] currentOutput:19} in stack
+stacksize:       3, sequenceSize:   8, remaininginput size:   0, sequence: [1 4 7 10 12 15 16 19]
+We found a combination! sequence [1 4 7 10 12 15 16 19] gives output 22 (stacksize 3)
+stacksize:       2, sequenceSize:   5, remaininginput size:   4, sequence: [1 4 7 10 11]
+offset[0], new output 12. putting new combo {sequence:[1 4 7 10 11 12] remainingInput:[15 16 19] currentOutput:12} in stack
+stacksize:       2, sequenceSize:   6, remaininginput size:   3, sequence: [1 4 7 10 11 12]
+offset[0], new output 15. putting new combo {sequence:[1 4 7 10 11 12 15] remainingInput:[16 19] currentOutput:15} in stack
+stacksize:       2, sequenceSize:   7, remaininginput size:   2, sequence: [1 4 7 10 11 12 15]
+offset[0], new output 16. putting new combo {sequence:[1 4 7 10 11 12 15 16] remainingInput:[19] currentOutput:16} in stack
+stacksize:       2, sequenceSize:   8, remaininginput size:   1, sequence: [1 4 7 10 11 12 15 16]
+offset[0], new output 19. putting new combo {sequence:[1 4 7 10 11 12 15 16 19] remainingInput:[] currentOutput:19} in stack
+stacksize:       2, sequenceSize:   9, remaininginput size:   0, sequence: [1 4 7 10 11 12 15 16 19]
+We found a combination! sequence [1 4 7 10 11 12 15 16 19] gives output 22 (stacksize 2)
+stacksize:       1, sequenceSize:   3, remaininginput size:   7, sequence: [1 4 6]
+offset[0], new output 7. putting new combo {sequence:[1 4 6 7] remainingInput:[10 11 12 15 16 19] currentOutput:7} in stack
+stacksize:       1, sequenceSize:   4, remaininginput size:   6, sequence: [1 4 6 7]
+offset[0], new output 10. putting new combo {sequence:[1 4 6 7 10] remainingInput:[11 12 15 16 19] currentOutput:10} in stack
+stacksize:       1, sequenceSize:   5, remaininginput size:   5, sequence: [1 4 6 7 10]
+offset[0], new output 11. putting new combo {sequence:[1 4 6 7 10 11] remainingInput:[12 15 16 19] currentOutput:11} in stack
+offset[1], new output 12. putting new combo {sequence:[1 4 6 7 10 12] remainingInput:[15 16 19] currentOutput:12} in stack
+stacksize:       2, sequenceSize:   6, remaininginput size:   3, sequence: [1 4 6 7 10 12]
+offset[0], new output 15. putting new combo {sequence:[1 4 6 7 10 12 15] remainingInput:[16 19] currentOutput:15} in stack
+stacksize:       2, sequenceSize:   7, remaininginput size:   2, sequence: [1 4 6 7 10 12 15]
+offset[0], new output 16. putting new combo {sequence:[1 4 6 7 10 12 15 16] remainingInput:[19] currentOutput:16} in stack
+stacksize:       2, sequenceSize:   8, remaininginput size:   1, sequence: [1 4 6 7 10 12 15 16]
+offset[0], new output 19. putting new combo {sequence:[1 4 6 7 10 12 15 16 19] remainingInput:[] currentOutput:19} in stack
+stacksize:       2, sequenceSize:   9, remaininginput size:   0, sequence: [1 4 6 7 10 12 15 16 19]
+We found a combination! sequence [1 4 6 7 10 12 15 16 19] gives output 22 (stacksize 2)
+stacksize:       1, sequenceSize:   6, remaininginput size:   4, sequence: [1 4 6 7 10 11]
+offset[0], new output 12. putting new combo {sequence:[1 4 6 7 10 11 12] remainingInput:[15 16 19] currentOutput:12} in stack
+stacksize:       1, sequenceSize:   7, remaininginput size:   3, sequence: [1 4 6 7 10 11 12]
+offset[0], new output 15. putting new combo {sequence:[1 4 6 7 10 11 12 15] remainingInput:[16 19] currentOutput:15} in stack
+stacksize:       1, sequenceSize:   8, remaininginput size:   2, sequence: [1 4 6 7 10 11 12 15]
+offset[0], new output 16. putting new combo {sequence:[1 4 6 7 10 11 12 15 16] remainingInput:[19] currentOutput:16} in stack
+stacksize:       1, sequenceSize:   9, remaininginput size:   1, sequence: [1 4 6 7 10 11 12 15 16]
+offset[0], new output 19. putting new combo {sequence:[1 4 6 7 10 11 12 15 16 19] remainingInput:[] currentOutput:19} in stack
+stacksize:       1, sequenceSize:  10, remaininginput size:   0, sequence: [1 4 6 7 10 11 12 15 16 19]
+We found a combination! sequence [1 4 6 7 10 11 12 15 16 19] gives output 22 (stacksize 1)
+stacksize:       0, sequenceSize:   3, remaininginput size:   8, sequence: [1 4 5]
+offset[0], new output 6. putting new combo {sequence:[1 4 5 6] remainingInput:[7 10 11 12 15 16 19] currentOutput:6} in stack
+offset[1], new output 7. putting new combo {sequence:[1 4 5 7] remainingInput:[10 11 12 15 16 19] currentOutput:7} in stack
+stacksize:       1, sequenceSize:   4, remaininginput size:   6, sequence: [1 4 5 7]
+offset[0], new output 10. putting new combo {sequence:[1 4 5 7 10] remainingInput:[11 12 15 16 19] currentOutput:10} in stack
+stacksize:       1, sequenceSize:   5, remaininginput size:   5, sequence: [1 4 5 7 10]
+offset[0], new output 11. putting new combo {sequence:[1 4 5 7 10 11] remainingInput:[12 15 16 19] currentOutput:11} in stack
+offset[1], new output 12. putting new combo {sequence:[1 4 5 7 10 12] remainingInput:[15 16 19] currentOutput:12} in stack
+stacksize:       2, sequenceSize:   6, remaininginput size:   3, sequence: [1 4 5 7 10 12]
+offset[0], new output 15. putting new combo {sequence:[1 4 5 7 10 12 15] remainingInput:[16 19] currentOutput:15} in stack
+stacksize:       2, sequenceSize:   7, remaininginput size:   2, sequence: [1 4 5 7 10 12 15]
+offset[0], new output 16. putting new combo {sequence:[1 4 5 7 10 12 15 16] remainingInput:[19] currentOutput:16} in stack
+stacksize:       2, sequenceSize:   8, remaininginput size:   1, sequence: [1 4 5 7 10 12 15 16]
+offset[0], new output 19. putting new combo {sequence:[1 4 5 7 10 12 15 16 19] remainingInput:[] currentOutput:19} in stack
+stacksize:       2, sequenceSize:   9, remaininginput size:   0, sequence: [1 4 5 7 10 12 15 16 19]
+We found a combination! sequence [1 4 5 7 10 12 15 16 19] gives output 22 (stacksize 2)
+stacksize:       1, sequenceSize:   6, remaininginput size:   4, sequence: [1 4 5 7 10 11]
+offset[0], new output 12. putting new combo {sequence:[1 4 5 7 10 11 12] remainingInput:[15 16 19] currentOutput:12} in stack
+stacksize:       1, sequenceSize:   7, remaininginput size:   3, sequence: [1 4 5 7 10 11 12]
+offset[0], new output 15. putting new combo {sequence:[1 4 5 7 10 11 12 15] remainingInput:[16 19] currentOutput:15} in stack
+stacksize:       1, sequenceSize:   8, remaininginput size:   2, sequence: [1 4 5 7 10 11 12 15]
+offset[0], new output 16. putting new combo {sequence:[1 4 5 7 10 11 12 15 16] remainingInput:[19] currentOutput:16} in stack
+stacksize:       1, sequenceSize:   9, remaininginput size:   1, sequence: [1 4 5 7 10 11 12 15 16]
+offset[0], new output 19. putting new combo {sequence:[1 4 5 7 10 11 12 15 16 19] remainingInput:[] currentOutput:19} in stack
+stacksize:       1, sequenceSize:  10, remaininginput size:   0, sequence: [1 4 5 7 10 11 12 15 16 19]
+We found a combination! sequence [1 4 5 7 10 11 12 15 16 19] gives output 22 (stacksize 1)
+stacksize:       0, sequenceSize:   4, remaininginput size:   7, sequence: [1 4 5 6]
+offset[0], new output 7. putting new combo {sequence:[1 4 5 6 7] remainingInput:[10 11 12 15 16 19] currentOutput:7} in stack
+stacksize:       0, sequenceSize:   5, remaininginput size:   6, sequence: [1 4 5 6 7]
+offset[0], new output 10. putting new combo {sequence:[1 4 5 6 7 10] remainingInput:[11 12 15 16 19] currentOutput:10} in stack
+stacksize:       0, sequenceSize:   6, remaininginput size:   5, sequence: [1 4 5 6 7 10]
+offset[0], new output 11. putting new combo {sequence:[1 4 5 6 7 10 11] remainingInput:[12 15 16 19] currentOutput:11} in stack
+offset[1], new output 12. putting new combo {sequence:[1 4 5 6 7 10 12] remainingInput:[15 16 19] currentOutput:12} in stack
+stacksize:       1, sequenceSize:   7, remaininginput size:   3, sequence: [1 4 5 6 7 10 12]
+offset[0], new output 15. putting new combo {sequence:[1 4 5 6 7 10 12 15] remainingInput:[16 19] currentOutput:15} in stack
+stacksize:       1, sequenceSize:   8, remaininginput size:   2, sequence: [1 4 5 6 7 10 12 15]
+offset[0], new output 16. putting new combo {sequence:[1 4 5 6 7 10 12 15 16] remainingInput:[19] currentOutput:16} in stack
+stacksize:       1, sequenceSize:   9, remaininginput size:   1, sequence: [1 4 5 6 7 10 12 15 16]
+offset[0], new output 19. putting new combo {sequence:[1 4 5 6 7 10 12 15 16 19] remainingInput:[] currentOutput:19} in stack
+stacksize:       1, sequenceSize:  10, remaininginput size:   0, sequence: [1 4 5 6 7 10 12 15 16 19]
+We found a combination! sequence [1 4 5 6 7 10 12 15 16 19] gives output 22 (stacksize 1)
+stacksize:       0, sequenceSize:   7, remaininginput size:   4, sequence: [1 4 5 6 7 10 11]
+offset[0], new output 12. putting new combo {sequence:[1 4 5 6 7 10 11 12] remainingInput:[15 16 19] currentOutput:12} in stack
+stacksize:       0, sequenceSize:   8, remaininginput size:   3, sequence: [1 4 5 6 7 10 11 12]
+offset[0], new output 15. putting new combo {sequence:[1 4 5 6 7 10 11 12 15] remainingInput:[16 19] currentOutput:15} in stack
+stacksize:       0, sequenceSize:   9, remaininginput size:   2, sequence: [1 4 5 6 7 10 11 12 15]
+offset[0], new output 16. putting new combo {sequence:[1 4 5 6 7 10 11 12 15 16] remainingInput:[19] currentOutput:16} in stack
+stacksize:       0, sequenceSize:  10, remaininginput size:   1, sequence: [1 4 5 6 7 10 11 12 15 16]
+offset[0], new output 19. putting new combo {sequence:[1 4 5 6 7 10 11 12 15 16 19] remainingInput:[] currentOutput:19} in stack
+stacksize:       0, sequenceSize:  11, remaininginput size:   0, sequence: [1 4 5 6 7 10 11 12 15 16 19]
+We found a combination! sequence [1 4 5 6 7 10 11 12 15 16 19] gives output 22 (stacksize 0)
+Part 2: There are 8 combinations (and 0 dead ends) to get to 22 joltage.
