@@ -50,7 +50,7 @@ func part1(seatChart [][]rune) {
 		rounds++
 		seatChart, changeCount = flipSeatsPt1(seatChart)
 
-		fmt.Printf("Round %2d: %3d seats changed\n", rounds, changeCount)
+		//fmt.Printf("Round %2d: %3d seats changed\n", rounds, changeCount)
 		if changeCount == 0 {
 			break
 		}
@@ -146,13 +146,13 @@ func countOccupiedSeats(seatChart [][]rune) int {
 
 func part2(seatChart [][]rune) {
 	var rounds, changeCount int
-	fmt.Printf("Start part2 ... \n")
-	printSeatChart(seatChart)
+	//fmt.Printf("Start part2 ... \n")
+	//printSeatChart(seatChart)
 	for {
 		rounds++
 		seatChart, changeCount = flipSeatsPt2(seatChart)
 
-		fmt.Printf("Round %2d: %3d seats changed\n", rounds, changeCount)
+		//fmt.Printf("Round %2d: %3d seats changed\n", rounds, changeCount)
 		//printSeatChart(seatChart)
 		if changeCount == 0 {
 			break
