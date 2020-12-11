@@ -86,10 +86,6 @@ func flipSeatsPt1(seatChart [][]rune) ([][]rune, int) {
 					newRow[j] = occupied
 				}
 			}
-			if seat == floor {
-				newRow[j] = floor
-				continue
-			}
 		}
 		newSeatChart[i] = newRow
 	}
@@ -150,7 +146,7 @@ func countOccupiedSeats(seatChart [][]rune) int {
 
 func part2(seatChart [][]rune) {
 	var rounds, changeCount int
-	fmt.Printf("Start part2 ... ")
+	fmt.Printf("Start part2 ... \n")
 	//printSeatChart(seatChart)
 	for {
 		rounds++
@@ -164,7 +160,6 @@ func part2(seatChart [][]rune) {
 	}
 
 	occupiedSeatCount := countOccupiedSeats(seatChart)
-
 
 	fmt.Printf("Part 2: Stabilization after %d rounds.  %d occupied seats\n", rounds, occupiedSeatCount)
 }
@@ -192,10 +187,6 @@ func flipSeatsPt2(seatChart [][]rune) ([][]rune, int) {
 				} else {
 					newRow[j] = occupied
 				}
-			}
-			if seat == floor {
-				newRow[j] = floor
-				continue
 			}
 		}
 		newSeatChart[i] = newRow
