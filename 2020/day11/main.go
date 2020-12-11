@@ -147,7 +147,7 @@ func countOccupiedSeats(seatChart [][]rune) int {
 func part2(seatChart [][]rune) {
 	var rounds, changeCount int
 	fmt.Printf("Start part2 ... \n")
-	//printSeatChart(seatChart)
+	printSeatChart(seatChart)
 	for {
 		rounds++
 		seatChart, changeCount = flipSeatsPt2(seatChart)
@@ -194,82 +194,60 @@ func flipSeatsPt2(seatChart [][]rune) ([][]rune, int) {
 	return newSeatChart, changCount
 }
 
+type vectorStatus int
+
+const (
+	 unspecified vectorStatus = iota
+	 emptySeat
+	 occupiedSeat
+	 edge
+)
+
 func adjacentCountPt2(seatChart [][]rune, i, j int) int {
+	// direction counts, starting up going clockwise
+	vectors := make([]vectorStatus, 8)
+
+	rowSize := len(seatChart)
+	colSize := len(seatChart[0])
+
 	count := 0
-
-	// look to the left
-	for jOffset := 1; j-jOffset >=0; jOffset++ {
-		if seatChart[i][j-jOffset] == occupied {
-			count++
-			break
-		} else if seatChart[i][j-jOffset] == empty {
+	vectorsDoneCount := 0
+	offset := 0
+	for {
+		offset++
+		vectorsDoneCount = 0
+		for vector := 0; vector < 8; vector++ {
+			if vectors[vector] == unspecified {
+				rowCheck, colCheck := i, j
+				switch vector {
+				case 0, 1, 7: // up, up to the right, up to the left
+					rowCheck = i - offset
+				case 3, 4, 5: // down, down to the right, down to the left
+					rowCheck = i + offset
+				}
+				switch vector {
+				case 1, 2, 3: // up to the right, right, down to the right
+					colCheck = j + offset
+				case 5, 6, 7: // down to the left, left, up to the left
+					colCheck = j - offset
+				}
+				//fmt.Printf("[%d,%d],[%d,%d], offset %d, vector %d, check [%d,%d]\n", rowSize,colSize, i,j,offset,vector,rowCheck,colCheck)
+				if rowCheck < 0 || rowCheck >= rowSize || colCheck < 0 || colCheck >= colSize {
+					vectors[vector] = edge
+				} else if seatChart[rowCheck][colCheck] == occupied {
+					vectors[vector] = occupiedSeat
+					count++
+				} else if seatChart[rowCheck][colCheck] == empty {
+					vectors[vector] = emptySeat
+				}
+			} else {
+				vectorsDoneCount++
+			}
+		}
+		if vectorsDoneCount == 8 {
 			break
 		}
 	}
-	// look to the right
-	for jOffset := 1; j+jOffset < len(seatChart[i]); jOffset++ {
-		if seatChart[i][j+jOffset] == occupied {
-			count++
-			break
-		} else if seatChart[i][j+jOffset] == empty {
-			break
-		}
-	}
-	// look up
-	for iOffset := 1; i-iOffset >= 0; iOffset++ {
-		if seatChart[i-iOffset][j] == occupied {
-			count++
-			break
-		} else if seatChart[i-iOffset][j] == empty {
-			break
-		}
-	}
-	// look down
-	for iOffset := 1; i+iOffset < len(seatChart); iOffset++ {
-		if seatChart[i+iOffset][j] == occupied {
-			count++
-			break
-		} else if seatChart[i+iOffset][j] == empty {
-			break
-		}
-	}
-	// up to the left
-	for offset := 1; i-offset >= 0 && j-offset >= 0; offset++ {
-		if seatChart[i-offset][j-offset] == occupied {
-			count++
-			break
-		} else if seatChart[i-offset][j-offset] == empty {
-			break
-		}
-	}
-	// up to the right
-	for offset := 1; i-offset >= 0 && j+offset < len(seatChart[i-offset]); offset++ {
-		if seatChart[i-offset][j+offset] == occupied {
-			count++
-			break
-		} else if seatChart[i-offset][j+offset] == empty {
-			break
-		}
-	}
-	// down to the left
-	for offset := 1; i+offset < len(seatChart) && j-offset >= 0; offset++ {
-		if seatChart[i+offset][j-offset] == occupied {
-			count++
-			break
-		} else if seatChart[i+offset][j-offset] == empty {
-			break
-		}
-	}
-	// down to the right
-	for offset := 1; i+offset < len(seatChart) && j+offset < len(seatChart[i+offset]); offset++ {
-		if seatChart[i+offset][j+offset] == occupied {
-			count++
-			break
-		} else if seatChart[i+offset][j+offset] == empty {
-			break
-		}
-	}
-
 	//fmt.Printf("[%d,%d] adjacentCount: %d\n", i,j,count)
 	return count
 }
