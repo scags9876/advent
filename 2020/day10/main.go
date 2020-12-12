@@ -1,51 +1,16 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
-	"sort"
-	"strconv"
+	"github.com/scags9876/adventOfCode/lib"
 )
 
 const inputFilename = "input.txt"
 
 func main() {
-	input := getInput()
+	input := lib.GetInputSortedInts(inputFilename)
 	part1(input)
 	part2(input)
-}
-
-func getInput() []int {
-	file, err := os.Open(inputFilename)
-	if err != nil {
-		panic(fmt.Errorf("%s file not found", inputFilename))
-	}
-	defer file.Close()
-
-	sc := bufio.NewScanner(file)
-
-	input := make([]int, 0)
-
-	for sc.Scan() {
-		line := sc.Text()
-
-		num, err := strconv.Atoi(line)
-		if err != nil {
-			panic(err)
-		}
-		input = SortedInsert(input, num)
-	}
-
-	return input
-}
-
-func SortedInsert(ss []int, s int) []int {
-	i := sort.SearchInts(ss, s)
-	ss = append(ss, 0)
-	copy(ss[i+1:], ss[i:])
-	ss[i] = s
-	return ss
 }
 
 func part1(input []int) {

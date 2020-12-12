@@ -1,32 +1,16 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
+	"github.com/scags9876/adventOfCode/lib"
 	"strings"
 )
 
 const inputFilename = "input.txt"
 
 func main() {
-	input := getInput()
+	input := lib.GetInputStrings(inputFilename)
 	solvePuzzle(input)
-}
-
-func getInput() []string {
-	file, err := os.Open(inputFilename)
-	if err != nil {
-		panic(fmt.Errorf("%s file not found", inputFilename))
-	}
-	defer file.Close()
-
-	var input []string
-	sc := bufio.NewScanner(file)
-	for sc.Scan() {
-		input = append(input, sc.Text())
-	}
-	return input
 }
 
 func solvePuzzle(input []string) {
