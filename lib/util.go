@@ -33,11 +33,7 @@ func GetInputInts(inputFilename string) []int {
 	var input []int
 	sc := bufio.NewScanner(file)
 	for sc.Scan() {
-		num, err := strconv.Atoi(sc.Text())
-		if err != nil {
-			panic(err)
-		}
-		input = append(input, num)
+		input = append(input, ToInt(sc.Text()))
 	}
 	return input
 }
@@ -55,13 +51,7 @@ func GetInputSortedInts(inputFilename string) []int {
 	input := make([]int, 0)
 
 	for sc.Scan() {
-		line := sc.Text()
-
-		num, err := strconv.Atoi(line)
-		if err != nil {
-			panic(err)
-		}
-		input = SortedInsertInt(input, num)
+		input = SortedInsertInt(input, ToInt(sc.Text()))
 	}
 
 	return input
@@ -73,4 +63,12 @@ func SortedInsertInt(ss []int, s int) []int {
 	copy(ss[i+1:], ss[i:])
 	ss[i] = s
 	return ss
+}
+
+func ToInt(s string) int {
+	num, err := strconv.Atoi(s)
+	if err != nil {
+		panic(err)
+	}
+	return num
 }
