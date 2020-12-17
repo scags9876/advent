@@ -53,9 +53,9 @@ func part1() int {
 }
 
 func sumExists(set []int, sum int) bool {
-	for i := 0; i < len(set) - 1; i++ {
+	for i := 0; i < len(set)-1; i++ {
 		a := set[i]
-		for j := i+1; j < len(set); j++ {
+		for j := i + 1; j < len(set); j++ {
 			b := set[j]
 			if a+b == sum {
 				return true

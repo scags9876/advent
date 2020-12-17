@@ -181,7 +181,7 @@ func getBagCount(bagName string, bags map[string]bag) int {
 	for innerBagName, count := range thisBag.contents {
 		innerBag := getBagCount(innerBagName, bags)
 
-		bagCount += count + (count*innerBag)
+		bagCount += count + (count * innerBag)
 	}
 
 	thisBag.bagCount = &bagCount

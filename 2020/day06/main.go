@@ -63,7 +63,7 @@ func part2() {
 		groupSize++
 		for _, char := range line {
 			if n, ok := answers[char]; ok {
-				answers[char] = n+1
+				answers[char] = n + 1
 			} else {
 				answers[char] = 1
 			}

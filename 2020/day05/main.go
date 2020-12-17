@@ -72,7 +72,7 @@ func part2() {
 		fmt.Printf("seatID: %d\n", seatID)
 		if lastSeatID != 0 && lastSeatID+1 != seatID {
 			fmt.Printf("Gap in the seats!  lastSeatID: %d, this seatID: %d\n", lastSeatID, seatID)
-			mySeat = lastSeatID+1
+			mySeat = lastSeatID + 1
 			break
 		}
 		lastSeatID = seatID

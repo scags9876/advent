@@ -10,7 +10,7 @@ const (
 	testInput1 = "0,3,6"
 	testInput2 = "1,3,2"
 	testInput3 = "3,1,2"
-	input = "0,1,5,10,3,12,19"
+	input      = "0,1,5,10,3,12,19"
 )
 
 func main() {

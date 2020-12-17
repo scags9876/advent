@@ -14,11 +14,12 @@ func main() {
 }
 
 type instruction struct {
-	op string
-	value int
+	op      string
+	value   int
 	visited bool
 	changed bool
 }
+
 func part1() {
 	file, err := os.Open(inputFilename)
 	if err != nil {

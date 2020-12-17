@@ -15,9 +15,9 @@ func main() {
 }
 
 const (
-	empty rune = 'L'
-	occupied = '#'
-	floor = '.'
+	empty    rune = 'L'
+	occupied      = '#'
+	floor         = '.'
 )
 
 func getInput() [][]rune {
@@ -57,7 +57,6 @@ func part1(seatChart [][]rune) {
 	}
 
 	occupiedSeatCount := countOccupiedSeats(seatChart)
-
 
 	fmt.Printf("Part 1: Stabilization after %d rounds.  %d occupied seats\n", rounds, occupiedSeatCount)
 }
@@ -197,10 +196,10 @@ func flipSeatsPt2(seatChart [][]rune) ([][]rune, int) {
 type vectorStatus int
 
 const (
-	 unspecified vectorStatus = iota
-	 emptySeat
-	 occupiedSeat
-	 edge
+	unspecified vectorStatus = iota
+	emptySeat
+	occupiedSeat
+	edge
 )
 
 func adjacentCountPt2(seatChart [][]rune, i, j int) int {
@@ -265,4 +264,3 @@ func printSeatChart(seatChart [][]rune) int {
 
 	return count
 }
-

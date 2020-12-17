@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/scags9876/adventOfCode/lib"
 )
 

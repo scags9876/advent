@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/scags9876/adventOfCode/lib"
 	"math"
 	"math/big"
 	"strconv"
 	"strings"
+
+	"github.com/scags9876/adventOfCode/lib"
 )
 
 const inputFilename = "input.txt"
@@ -48,9 +49,9 @@ func part1(arrivalTime int, busSchedule []int) {
 		if busID == 0 {
 			continue
 		}
-		busArrivalTime := busID * int(math.Ceil(float64(arrivalTime) / float64(busID)))
-		fmt.Printf("aT/bID=%d/%d=%.02f\n", arrivalTime,busID, float64(arrivalTime) / float64(busID))
-		fmt.Printf("bAT=bID*ceil(aT/BID)=%d*%d=%d\n", busID,int(math.Ceil(float64(arrivalTime) / float64(busID))), busArrivalTime)
+		busArrivalTime := busID * int(math.Ceil(float64(arrivalTime)/float64(busID)))
+		fmt.Printf("aT/bID=%d/%d=%.02f\n", arrivalTime, busID, float64(arrivalTime)/float64(busID))
+		fmt.Printf("bAT=bID*ceil(aT/BID)=%d*%d=%d\n", busID, int(math.Ceil(float64(arrivalTime)/float64(busID))), busArrivalTime)
 		if earliestBusArrival == 0 || busArrivalTime < earliestBusArrival {
 			earliestBusArrival = busArrivalTime
 			earliestBus = busID
@@ -83,20 +84,20 @@ func part2(busSchedule []int) {
 	// start with the largest buses first time around, guaranteeing we will start skipping
 	// by this much at the outset of the algorithm
 	largestBusID := sortedSchedule[len(sortedSchedule)-1]
-	timestamp := largestBusID-offsets[largestBusID]
+	timestamp := largestBusID - offsets[largestBusID]
 
 	done := false
 	for !done {
 		fmt.Printf("[%10d] ", timestamp)
 		timestampSkip := 1
 		foundMagicTimestamp := true
-		for i := len(sortedSchedule)-1; i>=0; i-- {
+		for i := len(sortedSchedule) - 1; i >= 0; i-- {
 			busID := sortedSchedule[i]
 			stepValue := timestamp + offsets[busID]
 
 			fmt.Printf("%d/%d=%dr%d ", stepValue, busID, stepValue/busID, stepValue%busID)
 
-			if stepValue % busID != 0 {
+			if stepValue%busID != 0 {
 				fmt.Printf("Nope! skipping ahead by %d\n", timestampSkip)
 				foundMagicTimestamp = false
 				break

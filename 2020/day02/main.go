@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/scags9876/adventOfCode/lib"
 	"strings"
+
+	"github.com/scags9876/adventOfCode/lib"
 )
 
 const inputFilename = "input.txt"
@@ -35,8 +36,8 @@ func solvePuzzle(input []string) {
 func checkLine(line string) (validPass1, validPass2 bool) {
 	var (
 		min, max int
-		letter rune
-		pw string
+		letter   rune
+		pw       string
 	)
 	_, err := fmt.Sscanf(line, "%d-%d %c: %s", &min, &max, &letter, &pw)
 	if err != nil {

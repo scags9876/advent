@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/scags9876/adventOfCode/lib"
 	"regexp"
 	"strconv"
 	"strings"
+
+	"github.com/scags9876/adventOfCode/lib"
 )
 
 const inputFilename = "input.txt"
@@ -24,7 +25,7 @@ func part1(input []string) {
 	for _, line := range input {
 		if strings.HasPrefix(line, "mask") {
 			var mask string
-			_, err := fmt.Sscanf(line,"mask = %s", &mask)
+			_, err := fmt.Sscanf(line, "mask = %s", &mask)
 			if err != nil {
 				panic(fmt.Errorf("invalid mask input: %s", line))
 			}
@@ -83,7 +84,7 @@ func part2(input []string) {
 	var mask string
 	for lineN, line := range input {
 		if strings.HasPrefix(line, "mask") {
-			_, err := fmt.Sscanf(line,"mask = %s", &mask)
+			_, err := fmt.Sscanf(line, "mask = %s", &mask)
 			if err != nil {
 				panic(fmt.Errorf("invalid mask input: %s", line))
 			}
@@ -108,7 +109,7 @@ func part2(input []string) {
 
 			for i := 0; i < len(mask); i++ {
 				maskChar := mask[i]
-				position := 35-i
+				position := 35 - i
 				switch maskChar {
 				case '1':
 					for j, k := range memKeys {
@@ -147,12 +148,14 @@ func part2(input []string) {
 	}
 	fmt.Printf("\nPart 2: %d\n", result)
 }
+
 // Sets the bit at pos in the integer n.
 func setBit(n int64, pos int) int64 {
 	mask := int64(1 << pos)
 	n |= mask
 	return n
 }
+
 // Clears the bit at pos in n.
 func clearBit(n int64, pos int) int64 {
 	mask := int64(^(1 << pos))

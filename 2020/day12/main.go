@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/scags9876/adventOfCode/lib"
 	"math"
 	"strconv"
+
+	"github.com/scags9876/adventOfCode/lib"
 )
 
 const inputFilename = "input.txt"
@@ -16,9 +17,9 @@ func main() {
 }
 
 const (
-	East = 0
+	East  = 0
 	South = 1
-	West = 2
+	West  = 2
 	North = 3
 )
 
@@ -46,13 +47,13 @@ func part1(input []string) {
 
 		switch operation {
 		case "N": // Action N means to move north by the given value.
-		currentY += value
+			currentY += value
 		case "S": // Action S means to move south by the given value.
-		currentY -= value
+			currentY -= value
 		case "E": // Action E means to move east by the given value.
-		currentX += value
+			currentX += value
 		case "W": // Action W means to move west by the given value.
-		currentX -= value
+			currentX -= value
 		case "L": // Action L means to turn left the given number of degrees.
 			switch value {
 			case 90:
@@ -86,7 +87,7 @@ func part1(input []string) {
 		fmt.Printf("%3d. After %4s at position [%3d,%3d], facing %s\n", i, instr, currentX, currentY, directions[currentDirection])
 	}
 
-	result := math.Abs(float64(currentX))+math.Abs(float64(currentY))
+	result := math.Abs(float64(currentX)) + math.Abs(float64(currentY))
 
 	fmt.Printf("Part 1: %d\n", int(result))
 }
@@ -94,6 +95,7 @@ func part1(input []string) {
 type coord struct {
 	x, y int
 }
+
 func part2(input []string) {
 	var ship, waypoint coord
 
@@ -131,7 +133,7 @@ func part2(input []string) {
 			ship.y = ship.y + (waypoint.y * value)
 		case "L", "R":
 			// Action L means to rotate the waypoint around the ship left (counter-clockwise) the given number of degrees.
-		  // Action R means to rotate the waypoint around the ship right (clockwise) the given number of degrees.
+			// Action R means to rotate the waypoint around the ship right (clockwise) the given number of degrees.
 			turns := value / 90
 			xTransform, yTransform := 1, 1
 			if operation == "L" {
@@ -150,7 +152,7 @@ func part2(input []string) {
 		fmt.Printf("%3d. After %4s at position [%3d,%3d], waypoint at [%3d,%3d]\n", i, instr, ship.x, ship.y, waypoint.x, waypoint.y)
 	}
 
-	result := math.Abs(float64(ship.x))+math.Abs(float64(ship.y))
+	result := math.Abs(float64(ship.x)) + math.Abs(float64(ship.y))
 
 	fmt.Printf("Part 2: %d\n", int(result))
 }

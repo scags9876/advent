@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/scags9876/adventOfCode/lib"
 )
 
@@ -11,7 +12,6 @@ func main() {
 	input := lib.GetInputInts(inputFilename)
 	solvePuzzle(input)
 }
-
 
 func solvePuzzle(input []int) {
 	var product1, product2 int

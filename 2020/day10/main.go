@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/scags9876/adventOfCode/lib"
 )
 
@@ -78,7 +79,6 @@ func part2(input []int) {
 
 	fmt.Printf("Part 2: There are %d combinations to get to %d joltage.\n", comboCount, finalJoltage)
 }
-
 
 type combo struct {
 	sequence       []int
