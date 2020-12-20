@@ -72,3 +72,11 @@ func ToInt(s string) int {
 	}
 	return num
 }
+
+func ToIntOk(s string) (int, bool) {
+	n, err := strconv.Atoi(s)
+	if err != nil {
+		return 0, false
+	}
+	return n, true
+}
