@@ -31,8 +31,7 @@ type tile struct {
 func main() {
 	input := lib.GetInputStrings(inputFilename)
 	pic := part1(input)
-	fmt.Printf("pic size: %d\n", len(pic))
-	//part2(input)
+	part2(pic)
 }
 
 func part1(input []string) [][]*tile {
@@ -49,6 +48,100 @@ func part1(input []string) [][]*tile {
 
 	fmt.Printf("Part 1: %d\n", result)
 	return pic
+}
+
+func part2(tiledPic [][]*tile) {
+	pic := stitchPic(tiledPic)
+	pic, monsterCount := countMonsters(pic)
+	result := 0
+	if monsterCount > 0 {
+		result = countWaves(pic)
+	}
+	fmt.Printf("Part 2: %d\n", result)
+}
+
+func stitchPic(tiledPic [][]*tile) [][]byte {
+	picSize := len(tiledPic)
+	tileSize := len(tiledPic[0][0].grid) - 2
+	pic := make([][]byte, tileSize * picSize)
+	for tileI, row := range tiledPic {
+		iOffset := tileI * tileSize
+		for _, tile := range row {
+			for i := 1; i < len(tile.grid)-1; i++ {
+				for j := 1; j < len(tile.grid)-1; j++ {
+					pic[i-1+iOffset] = append(pic[i-1+iOffset], tile.grid[i][j])
+				}
+			}
+		}
+	}
+	fmt.Printf("Stitched pic:\n")
+	printGrid(pic)
+	return pic
+}
+
+func countMonsters(pic [][]byte) ([][]byte, int) {
+	//01234567890123456789
+	//.#...#.###...#.##.O#
+	//O.##.OO#.#.OO.##.OOO
+	//#O.#O#.O##O..O.#O##.
+	monsterPairs := [][]int{
+		{-1,-1},
+		{0, -1},
+		{0, -2},
+		{1, -3},
+		{1, -6},
+		{0, -7},
+		{0, -8},
+		{1, -9},
+		{1, -12},
+		{0, -13},
+		{0, -14},
+		{1, -15},
+		{1, -18},
+		{0, -19},
+	}
+
+	size := len(pic)
+	monsterCount := 0
+
+	for flips := 0; flips < 2; flips++ {
+		for rotations := 0; rotations < 4; rotations++ {
+			fmt.Printf("trying with %d flips, %d rotations\n", flips, rotations)
+			printGrid(pic)
+
+			// find the nose of the monster
+			for i := 1; i < size-1; i++ {
+				for j := 19; j < size; j++ {
+					if pic[i][j] == on {
+						foundMonster := true
+						// look for the body of the monster with relative pixels
+						for _, coord := range monsterPairs {
+							if pic[i+coord[0]][j+coord[1]] != on {
+								foundMonster = false
+								break
+							}
+						}
+						if foundMonster {
+							monsterCount++
+							pic[i][j] = 'o'
+							for _, coord := range monsterPairs {
+								pic[i+coord[0]][j+coord[1]] = 'O'
+							}
+						}
+					}
+				}
+			}
+			if monsterCount > 0 {
+				fmt.Printf("found %d monsters!\n", monsterCount)
+				printGrid(pic)
+				return pic, monsterCount
+			}
+			pic = rotateGrid(pic)
+		}
+		pic = flipGrid(pic)
+	}
+
+	return pic, monsterCount
 }
 
 func parseInput(input []string) map[int]tile {
@@ -283,4 +376,26 @@ func (t tile) String() string {
 	)
 
 	return str.String()
+}
+
+func printGrid(grid [][]byte) {
+	for i, row := range grid {
+		fmt.Printf("%2d ", i)
+		for _, pixel := range row {
+			fmt.Printf("%c", pixel)
+		}
+		fmt.Println()
+	}
+}
+
+func countWaves(grid [][]byte) int {
+	count := 0
+	for _, row := range grid {
+		for _, pixel := range row {
+			if pixel == on {
+				count++
+			}
+		}
+	}
+	return count
 }
