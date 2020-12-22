@@ -6,6 +6,7 @@ import (
 	"os"
 	"sort"
 	"strconv"
+	"strings"
 )
 
 func GetInputStrings(inputFilename string) []string {
@@ -78,4 +79,12 @@ func ToIntOk(s string) (int, bool) {
 		return 0, false
 	}
 	return n, true
+}
+
+func JoinInts(si []int, s string) string {
+	ss := make([]string, len(si))
+	for i, n := range si {
+		ss[i] = strconv.Itoa(n)
+	}
+	return strings.Join(ss, s)
 }
