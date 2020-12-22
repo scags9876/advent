@@ -38,7 +38,6 @@ func GetInputInts(inputFilename string) []int {
 	return input
 }
 
-
 func GetInputSortedInts(inputFilename string) []int {
 	file, err := os.Open(inputFilename)
 	if err != nil {
