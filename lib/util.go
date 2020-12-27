@@ -88,3 +88,21 @@ func JoinInts(si []int, s string) string {
 	}
 	return strings.Join(ss, s)
 }
+
+func StringInSlice(set []string, s string) bool {
+	for _, el := range set {
+		if el == s {
+			return true
+		}
+	}
+	return false
+}
+
+func IntInSlice(set []int, s int) bool {
+	for _, el := range set {
+		if el == s {
+			return true
+		}
+	}
+	return false
+}
