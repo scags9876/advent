@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/scags9876/adventOfCode/lib"
 )
 
@@ -32,7 +33,7 @@ func part1(input []string) map[string]bool {
 			directionFound := false
 			var dir string
 			if i < size-1 {
-				dir = line[i:i+2]
+				dir = line[i : i+2]
 				switch dir {
 				case "ne":
 					x++
@@ -64,7 +65,7 @@ func part1(input []string) map[string]bool {
 					x++
 					y--
 				default:
-					panic(fmt.Sprintf("unknown direction: %s ",dir))
+					panic(fmt.Sprintf("unknown direction: %s ", dir))
 				}
 				i++
 			}
@@ -74,7 +75,7 @@ func part1(input []string) map[string]bool {
 				break
 			}
 		}
-		coord := lib.JoinInts([]int{x,y,z}, ",")
+		coord := lib.JoinInts([]int{x, y, z}, ",")
 		if floor[coord] {
 			if verbose {
 				fmt.Printf("Flipping tile %s to white (%s)\n", coord, line)
@@ -126,18 +127,18 @@ func part2(initialFloor map[string]bool) {
 
 	for day := 1; day <= maxDays; day++ {
 		newFloor := make(map[string]bool)
-		minX,minY,_,maxX,maxY,_ := getFloorBounds(floor)
-		for x := minX-1; x <= maxX+1; x++ {
-			for y := minY-1; y <= maxY+1; y++ {
+		minX, minY, _, maxX, maxY, _ := getFloorBounds(floor)
+		for x := minX - 1; x <= maxX+1; x++ {
+			for y := minY - 1; y <= maxY+1; y++ {
 				// always with cube coordinates the sum of x,y,z must equal zero
-				z := 0-(x+y)
-				coord := lib.JoinInts([]int{x,y,z}, ",")
+				z := 0 - (x + y)
+				coord := lib.JoinInts([]int{x, y, z}, ",")
 				count := 0
 				for _, direction := range cubeDirections {
-					adjacentX := x+direction[0]
-					adjacentY := y+direction[1]
-					adjacentZ := z+direction[2]
-					adjacentCoord := lib.JoinInts([]int{adjacentX,adjacentY,adjacentZ}, ",")
+					adjacentX := x + direction[0]
+					adjacentY := y + direction[1]
+					adjacentZ := z + direction[2]
+					adjacentCoord := lib.JoinInts([]int{adjacentX, adjacentY, adjacentZ}, ",")
 					if adjacentValue, adjacentOK := floor[adjacentCoord]; adjacentOK && adjacentValue {
 						count++
 					}
@@ -169,7 +170,7 @@ func part2(initialFloor map[string]bool) {
 
 }
 
-func getFloorBounds(floor map[string]bool) (minX,minY,minZ,maxX,maxY,maxZ int) {
+func getFloorBounds(floor map[string]bool) (minX, minY, minZ, maxX, maxY, maxZ int) {
 	for coord, value := range floor {
 		if !value {
 			continue

@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/davecgh/go-spew/spew"
-	"github.com/scags9876/adventOfCode/lib"
 	"sort"
 	"strings"
+
+	"github.com/davecgh/go-spew/spew"
+	"github.com/scags9876/adventOfCode/lib"
 )
 
 const inputFilename = "input.txt"
@@ -114,7 +115,7 @@ func stringInSlice(set []string, s string) bool {
 
 type food struct {
 	ingredients []string
-	allergens []string
+	allergens   []string
 }
 
 func parseInput(input []string) []food {

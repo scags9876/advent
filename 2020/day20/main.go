@@ -3,10 +3,11 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/davecgh/go-spew/spew"
-	"github.com/scags9876/adventOfCode/lib"
 	"math"
 	"strings"
+
+	"github.com/davecgh/go-spew/spew"
+	"github.com/scags9876/adventOfCode/lib"
 )
 
 const inputFilename = "input.txt"
@@ -16,16 +17,16 @@ const testInput2Filename = "testinput2.txt"
 const verbose = false
 
 const (
-	on byte = '#'
+	on  byte = '#'
 	off byte = '.'
 )
 
 type tile struct {
-	id int
-	grid [][]byte
-	edges [4]string // top, right, bottom, left
+	id        int
+	grid      [][]byte
+	edges     [4]string // top, right, bottom, left
 	rotations int
-	flipped bool
+	flipped   bool
 }
 
 func main() {
@@ -63,7 +64,7 @@ func part2(tiledPic [][]*tile) {
 func stitchPic(tiledPic [][]*tile) [][]byte {
 	picSize := len(tiledPic)
 	tileSize := len(tiledPic[0][0].grid) - 2
-	pic := make([][]byte, tileSize * picSize)
+	pic := make([][]byte, tileSize*picSize)
 	for tileI, row := range tiledPic {
 		iOffset := tileI * tileSize
 		for _, tile := range row {
@@ -85,7 +86,7 @@ func countMonsters(pic [][]byte) ([][]byte, int) {
 	//O.##.OO#.#.OO.##.OOO
 	//#O.#O#.O##O..O.#O##.
 	monsterPairs := [][]int{
-		{-1,-1},
+		{-1, -1},
 		{0, -1},
 		{0, -2},
 		{1, -3},
@@ -158,7 +159,7 @@ func parseInput(input []string) map[int]tile {
 				panic(fmt.Errorf("unexpeced tile ID %v %s", err, line))
 			}
 			t = tile{
-				id:         tileID,
+				id:   tileID,
 				grid: make([][]byte, 0),
 			}
 		} else {
@@ -186,12 +187,12 @@ func calculateEdges(t tile) tile {
 	newTile := t
 	newTile.edges = [4]string{}
 	tileSize := len(t.grid)
-	maxOffset := tileSize-1
+	maxOffset := tileSize - 1
 	for offset := 0; offset < tileSize; offset++ {
-		newTile.edges[0] = newTile.edges[0] + string(newTile.grid[0][offset]) // top edge
+		newTile.edges[0] = newTile.edges[0] + string(newTile.grid[0][offset])         // top edge
 		newTile.edges[1] = newTile.edges[1] + string(newTile.grid[offset][maxOffset]) // right edge
 		newTile.edges[2] = newTile.edges[2] + string(newTile.grid[maxOffset][offset]) // bottom edge
-		newTile.edges[3] = newTile.edges[3] + string(newTile.grid[offset][0]) // left edge
+		newTile.edges[3] = newTile.edges[3] + string(newTile.grid[offset][0])         // left edge
 	}
 	return newTile
 }
@@ -219,7 +220,6 @@ func arrangeTiles(tiles map[int]tile) [][]*tile {
 	printPic(pic)
 	return pic
 }
-
 
 func fillPic(startPic [][]*tile, tiles map[int]tile, startUsedTiles []int) ([][]*tile, error) {
 	if verbose {
@@ -286,7 +286,7 @@ func fillPic(startPic [][]*tile, tiles map[int]tile, startUsedTiles []int) ([][]
 
 func rotateTile(t tile, rotations int) tile {
 	newTile := t
-	for r := 1; r<=rotations; r++ {
+	for r := 1; r <= rotations; r++ {
 		newTile.grid = rotateGrid(newTile.grid)
 		newTile = calculateEdges(newTile)
 		newTile.rotations++
@@ -311,7 +311,7 @@ func flipTile(t tile, n int) tile {
 
 func rotateGrid(g [][]byte) [][]byte {
 	size := len(g) // assumes grid is a square
-	max := size-1
+	max := size - 1
 	newGrid := make([][]byte, size)
 	for i := 0; i < size; i++ {
 		newGrid[i] = make([]byte, size)
@@ -324,7 +324,7 @@ func rotateGrid(g [][]byte) [][]byte {
 
 func flipGrid(g [][]byte) [][]byte {
 	size := len(g) // assumes grid is a square
-	max := size-1
+	max := size - 1
 	newGrid := make([][]byte, size)
 	for i := 0; i < size; i++ {
 		newGrid[i] = make([]byte, size)

@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/davecgh/go-spew/spew"
-	"github.com/scags9876/adventOfCode/lib"
 	"regexp"
 	"strings"
+
+	"github.com/davecgh/go-spew/spew"
+	"github.com/scags9876/adventOfCode/lib"
 )
 
 const inputFilename = "input.txt"
@@ -24,7 +25,7 @@ func part1(input []string) {
 	rule, msgs := parseInput(input, map[int]string{}, 10)
 
 	if verbose {
-		fmt.Printf("input: %s", spew.Sdump(rule,msgs))
+		fmt.Printf("input: %s", spew.Sdump(rule, msgs))
 	}
 
 	count := 0
@@ -38,7 +39,7 @@ func part1(input []string) {
 
 func part2(input []string) {
 	replacements := map[int]string{
-		8: "42 | 42 8",
+		8:  "42 | 42 8",
 		11: "42 31 | 42 11 31",
 	}
 
@@ -49,7 +50,7 @@ func part2(input []string) {
 		rule, msgs := parseInput(input, replacements, maxDepth)
 
 		if verbose {
-			fmt.Printf("input: %s", spew.Sdump(rule,msgs))
+			fmt.Printf("input: %s", spew.Sdump(rule, msgs))
 		}
 
 		count := 0
@@ -112,7 +113,6 @@ func parseInput(input []string, replacements map[int]string, maxDepth int) (*reg
 	return rule, msgs
 }
 
-
 func resolveRule(ruleID int, rules map[int]string, loopDepth, maxDepth int) string {
 	rule := rules[ruleID]
 	var reg strings.Builder
@@ -140,7 +140,7 @@ func resolveRule(ruleID int, rules map[int]string, loopDepth, maxDepth int) stri
 		}
 	}
 	if strings.Contains(rule, "|") {
-		reg.WriteString(	"))")
+		reg.WriteString("))")
 	}
 	return reg.String()
 }
@@ -150,6 +150,7 @@ func matchesRule(msg string, rule *regexp.Regexp) bool {
 }
 
 var letterRegExp = regexp.MustCompile(`^[ab]$`)
+
 func isALetter(expr string) bool {
 	match := letterRegExp.FindString(expr)
 	if match == "" {

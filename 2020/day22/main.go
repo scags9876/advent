@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/scags9876/adventOfCode/lib"
 )
 
@@ -18,10 +19,10 @@ func main() {
 }
 
 type gameState struct {
-	id int
+	id      int
 	player1 []int
 	player2 []int
-	round int
+	round   int
 }
 
 func part1(input []string) {
@@ -37,7 +38,7 @@ func part1(input []string) {
 		//fmt.Printf("Player 1's deck: %s\n", lib.JoinInts(game.player1, ", "))
 		//fmt.Printf("Player 2's deck: %s\n", lib.JoinInts(game.player2, ", "))
 
-		thisHand := lib.JoinInts(game.player1, ",")+"#"+lib.JoinInts(game.player2, ", ")
+		thisHand := lib.JoinInts(game.player1, ",") + "#" + lib.JoinInts(game.player2, ", ")
 		if _, ok := previousHands[thisHand]; ok {
 			//fmt.Println("Player 1 automatically wins to avoid infinite recursion")
 			winner = 1
@@ -107,6 +108,7 @@ func part2(input []string) {
 }
 
 var gameID int
+
 func playRecursiveCombat(game gameState) (int, gameState) {
 	//fmt.Printf("\n==== Game %d ====\n", game.id)
 	previousHands := make(map[string]bool)
@@ -118,7 +120,7 @@ func playRecursiveCombat(game gameState) (int, gameState) {
 		//fmt.Printf("Player 1's deck: %s\n", lib.JoinInts(game.player1, ", "))
 		//fmt.Printf("Player 2's deck: %s\n", lib.JoinInts(game.player2, ", "))
 
-		thisHand := lib.JoinInts(game.player1, ",")+"#"+lib.JoinInts(game.player2, ", ")
+		thisHand := lib.JoinInts(game.player1, ",") + "#" + lib.JoinInts(game.player2, ", ")
 		if _, ok := previousHands[thisHand]; ok {
 			//fmt.Println("Player 1 automatically wins to avoid infinite recursion")
 			winner = 1
@@ -145,7 +147,7 @@ func playRecursiveCombat(game gameState) (int, gameState) {
 				player2[i] = card
 			}
 			subGame := gameState{
-				id: gameID,
+				id:      gameID,
 				player1: player1,
 				player2: player2,
 			}
@@ -188,16 +190,19 @@ func playRecursiveCombat(game gameState) (int, gameState) {
 
 func parseInput(input []string) gameState {
 	game := gameState{
-		id: 1,
+		id:      1,
 		player1: make([]int, 0),
 		player2: make([]int, 0),
 	}
 	var player int
 	for _, line := range input {
 		switch line {
-		case "Player 1:": player = 1
-		case "Player 2:": player = 2
-		case "": continue
+		case "Player 1:":
+			player = 1
+		case "Player 2:":
+			player = 2
+		case "":
+			continue
 		default:
 			card := lib.ToInt(line)
 			if player == 1 {

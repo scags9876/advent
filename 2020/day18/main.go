@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/scags9876/adventOfCode/lib"
 	"regexp"
 	"strconv"
 	"strings"
+
+	"github.com/scags9876/adventOfCode/lib"
 )
 
 const inputFilename = "input.txt"
@@ -40,7 +41,7 @@ func part2(input []string) {
 }
 
 const (
-	add = '+'
+	add  = '+'
 	mult = '*'
 )
 
@@ -69,7 +70,7 @@ func calculate(expr string) int64 {
 			} else {
 				total *= n
 			}
-			position += len(subExpr)+2
+			position += len(subExpr) + 2
 		} else if token == add || token == mult {
 			if token == add {
 				op = add
@@ -83,7 +84,6 @@ func calculate(expr string) int64 {
 	}
 	return total
 }
-
 
 func calculatev2(expr string) int64 {
 	if verbose {
@@ -128,7 +128,7 @@ func calcSubexpr(expr string) string {
 				fmt.Printf("subExpr %s = %d\n", subExpr, n)
 			}
 			newExpr.WriteString(fmt.Sprintf("%d", n))
-			position += len(subExpr)+2
+			position += len(subExpr) + 2
 		} else {
 			newExpr.WriteByte(token)
 			position++
@@ -148,7 +148,7 @@ func calcAdditions(expr string) string {
 		}
 		matchLoc := matches[0]
 		match := newExpr[matchLoc[0]:matchLoc[1]]
-		var a,b int64
+		var a, b int64
 		n, err := fmt.Sscanf(match, "%d+%d", &a, &b)
 		if err != nil || n != 2 {
 			panic(err)
@@ -169,17 +169,18 @@ func calcMultiplications(expr string) string {
 		if match == "" {
 			break
 		}
-		var a,b int64
+		var a, b int64
 		n, err := fmt.Sscanf(match, "%d*%d", &a, &b)
 		if err != nil || n != 2 {
 			panic(err)
 		}
-		newExpr = strings.Replace(newExpr, match, fmt.Sprintf("%d",a*b), -1)
+		newExpr = strings.Replace(newExpr, match, fmt.Sprintf("%d", a*b), -1)
 	}
 	return newExpr
 }
 
 var numRegExp = regexp.MustCompile(`^\d+`)
+
 func isANumber(expr string, position int) (int64, bool) {
 	match := numRegExp.FindString(expr[position:])
 	if match == "" {
@@ -195,7 +196,7 @@ func isANumber(expr string, position int) (int64, bool) {
 func subExprStartingAt(expr string, position int) string {
 	var subExpr strings.Builder
 	openParenCount := 1
-	for p := position+1; p < len(expr); p++ {
+	for p := position + 1; p < len(expr); p++ {
 		switch expr[p] {
 		case '(':
 			openParenCount++

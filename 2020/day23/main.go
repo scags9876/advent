@@ -2,18 +2,19 @@ package main
 
 import (
 	"fmt"
-	"github.com/scags9876/adventOfCode/lib"
 	"strconv"
 	"strings"
+
+	"github.com/scags9876/adventOfCode/lib"
 )
 
-const input     = "219347865"
+const input = "219347865"
 const testInput = "389125467"
 
 const (
-	lowValue = 1
-	highValue = 9
-	moves = 100
+	lowValue      = 1
+	highValue     = 9
+	moves         = 100
 	giantCupsSize = 1_000_000
 	//giantCupsSize = 20
 	giantMoves = 10_000_000
@@ -56,7 +57,7 @@ func makeMove(cups []int, currentCup int) ([]int, int) {
 
 	var pickUpList []int
 	for i := 0; i < 3; i++ {
-		idx := currentCup+1+i
+		idx := currentCup + 1 + i
 		if idx >= size {
 			idx -= size
 		}
@@ -79,18 +80,18 @@ func makeMove(cups []int, currentCup int) ([]int, int) {
 	destCup := findDestCup(cups, destValue)
 
 	for i := 1; i <= size; i++ {
-		dest := currentCup+i
+		dest := currentCup + i
 		if dest >= size {
 			dest -= size
 		}
-		from := dest+3
+		from := dest + 3
 		if from >= size {
 			from -= size
 		}
 		cups[dest] = cups[from]
 		if cups[dest] == destValue {
 			for i, n := range pickUpList {
-				pickUpDest := dest+i+1
+				pickUpDest := dest + i + 1
 				if pickUpDest >= size {
 					pickUpDest -= size
 				}
@@ -130,7 +131,7 @@ func part2(initialCups []int) {
 			lastNum = initialCups[i]
 		}
 	}
-	for i := size+1; i <= giantCupsSize; i++ {
+	for i := size + 1; i <= giantCupsSize; i++ {
 		cups[lastNum] = i
 		lastNum = i
 	}
@@ -168,7 +169,7 @@ func part2(initialCups []int) {
 		cups[currentCup] = pickUpEnd
 
 		// find the destination cup
-		destCup := currentCup-1
+		destCup := currentCup - 1
 		if destCup < 1 {
 			destCup = max
 		}
@@ -246,7 +247,7 @@ func reorderCups(cups []int, lastCup int) []int {
 			break
 		}
 	}
-	if targetIdx == len(cups) - 1 {
+	if targetIdx == len(cups)-1 {
 		// target is already last
 		return cups
 	}
