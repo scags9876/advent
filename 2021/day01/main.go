@@ -13,8 +13,6 @@ const expectedTestResultPart2 = 5
 
 const verbose = false
 
-const maxDays = 100
-
 func main() {
 	testInput := lib.GetInputInts(testInputFilename)
 	input := lib.GetInputInts(inputFilename)
