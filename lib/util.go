@@ -89,6 +89,24 @@ func JoinInts(si []int, s string) string {
 	return strings.Join(ss, s)
 }
 
+func StringToInts(s, separator string) []int {
+	listStr := strings.Split(s, separator)
+	list := make([]int, len(listStr))
+	for i, n := range listStr {
+		list[i] = ToInt(n)
+	}
+	return list
+}
+
+func StringToSortedInts(s, separator string) []int {
+	listStr := strings.Split(s, separator)
+	var list []int
+	for _, n := range listStr {
+		list = SortedInsertInt(list, ToInt(n))
+	}
+	return list
+}
+
 func StringInSlice(set []string, s string) bool {
 	for _, el := range set {
 		if el == s {
