@@ -124,3 +124,11 @@ func IntInSlice(set []int, s int) bool {
 	}
 	return false
 }
+
+func SumInts(set []int) int {
+	var result int
+	for _, n := range set {
+		result += n
+	}
+	return result
+}
